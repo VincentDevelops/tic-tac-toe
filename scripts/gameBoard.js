@@ -1,6 +1,6 @@
 // handles the logical game board
 
-function gameBoard(size) {
+const gameBoard = (size) => {
 
     const minimumBoardSize = 3;
     let boardSize = 3;
@@ -15,10 +15,10 @@ function gameBoard(size) {
 
     validateAndSetBoardSize(size);
     
-    // creates a matrix of size, ex size = 3
+    // creates a matrix of size boardSize, ex boardSize = 3
     // ['', '', '']
-    // ['', '', '']
-    // ['', '', '']
+    // ['', '', ''] where board[0,0] is found on the top left
+    // ['', '', ''] and board[2, 2] is the bottom right
     let board = Array.from({ length: boardSize }, () => Array(boardSize).fill(''));
 
 
@@ -28,24 +28,24 @@ function gameBoard(size) {
         board = Array.from({ length: boardSize }, () => Array(boardSize).fill(''));
     }
 
-    const isValidCoordinate = (x,y) => {
-        if (x >= boardSize || x < 0 || y >= boardSize || y < 0)
+    const isValidCoordinate = (row,column) => {
+        if (row >= boardSize || row < 0 || column >= boardSize || column < 0)
             return false;
 
         return true;
     }
 
-    const setSlotTo = (playerSign, x, y) => {
-        if (isValidCoordinate(x,y))
-            board[x][y] = playerSign;
+    const setSlotTo = (playerSign, row, column) => {
+        if (isValidCoordinate(row,column))
+            board[row][column] = playerSign;
         else 
             throw new Error("invalid coordinate found in gameBoard.js");
             
     };
 
-    const getSlot = (x,y) => {
-        if (isValidCoordinate(x,y))
-            return board[x][y];
+    const getSlot = (row,column) => {
+        if (isValidCoordinate(row,column))
+            return board[row][column];
         else {
             throw new Error("Invalid coordinate selected");
         }
