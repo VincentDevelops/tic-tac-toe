@@ -192,30 +192,3 @@ const gameController = ((gameBoard, state) => {
                 isGameWon , isPlayer1Turn }
     
 })
-
-const board = gameBoard(3);
-const state = gameState();
-const controller = gameController(board, state);
-
-controller.takeTurn(0,0,'x');
-controller.takeTurn(1,1,'x');
-controller.takeTurn(1,2,'x');
-controller.takeTurn(2,0,'x');
-controller.takeTurn(2,2,'x');
-controller.takeTurn(2,1,'x');
-controller.takeTurn(1,0,'x');
-console.log(state.isGameWon());
-
-
-for (let row = 0; row < 3; row ++) {
-    let line = '';
-    for (let column = 0; column < 3; column++) {
-        if (board.getSlot(row,column) == '')
-            line += "_"; 
-        else
-            line += board.getSlot(row,column);
-
-    }
-
-    console.log(line);
-}

@@ -1,28 +1,26 @@
-
-
 :root {
-    --bg-color: rgb(15, 23, 42);
-    --grid-color: rgb(51, 65, 85);
-    --player-x: rgb(244, 63, 94);
-    --player-o: rgb(14, 165, 233);
-    --text-main: rgb(241, 245, 249);
+    --step--2: clamp(0.7813rem, 0.7736rem + 0.0341vw, 0.8rem);
+    --step--1: clamp(0.9375rem, 0.9119rem + 0.1136vw, 1rem);
+    --step-0: clamp(1.125rem, 1.0739rem + 0.2273vw, 1.25rem);
+    --step-1: clamp(1.35rem, 1.2631rem + 0.3864vw, 1.5625rem);
+    --step-2: clamp(1.62rem, 1.4837rem + 0.6057vw, 1.9531rem);
+    --step-3: clamp(1.944rem, 1.7405rem + 0.9044vw, 2.4414rem);
+    --step-4: clamp(2.3328rem, 2.0387rem + 1.3072vw, 3.0518rem);
+    --step-5: clamp(2.7994rem, 2.384rem + 1.8461vw, 3.8147rem);
 
-    --board-size: 3;
-    --max-board-width: 600px;
-    --max-board-height: 600px;
-    --min-board-width: 100px;
-    --min-board-height: 100px;    
-
-    --grid-border-size: 2px;
-
-
+    --bg-color: #FFE8C2; /* Wheat */
+    --font-color: #E4FFE1; /* Frosted Mint */
 }
-
 
 body {
     height: 100vh;
     width: 100vw;
     background-color: var(--bg-color);
+}
+
+header {
+    background-color: var(--header-bg);
+    color: var(--header-text)
 }
 
 .flex {
@@ -36,87 +34,33 @@ body {
 .container {
     height: 100%;
     width: 100%;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid red;
+}
+
+.container-header {
+    border:2px solid red;
+    position: sticky;
+    top:0;
+    width: 100%;
+
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: .5rem;
+    padding-right: .5rem;
+
+    font-size: var(--step-2);
 }
 
 .container-main {
-    height: 100%;
-    width: 100%;
-
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-}
-
-/* board ======================================================= */
-
-.board-container {
     border: 2px solid red;
     width: 100%;
     height: 100%;
-    grid-template-columns: repeat(var(--board-size), minmax(100px, 1fr));    
-    grid-template-columns: repeat(--board-size, minmax(100px, 1fr));    
-
-    min-height: var(--min-board-height);
-
+    justify-content: center;
+    align-items: center;
 }
 
-
-/* board design */
-
-/* left slots */
-
-.top-left-slot {
-    border-bottom: var(--grid-border-size) solid var(--grid-color);
-    border-right: var(--grid-border-size)solid var(--grid-color);
+.logo {
+    width: 
 }
-
-.middle-left-slot {
-    border-bottom: var(--grid-border-size) solid var(--grid-color);
-    border-right: var(--grid-border-size) solid var(--grid-color);
-    border-top: var(--grid-border-size) solid var(--grid-color);
-}
-
-.bottom-left-slot {
-    border-right: var(--grid-border-size) solid var(--grid-color);
-    border-top: var(--grid-border-size) solid var(--grid-color);
-}
-
-/* middle slots */
-
-.top-middle-slot {
-    border-bottom: var(--grid-border-size) solid var(--grid-color);
-    border-left: var(--grid-border-size) solid var(--grid-color);
-    border-right: var(--grid-border-size) solid var(--grid-color);
-}
-
-.middle-slot {
-    border-top: var(--grid-border-size) solid var(--grid-color);
-    border-right: var(--grid-border-size) solid var(--grid-color);
-    border-left: var(--grid-border-size) solid var(--grid-color);
-    border-bottom: var(--grid-border-size) solid var(--grid-color);
-}
-
-.bottom-middle-slot {
-    border-left: var(--grid-border-size) solid var(--grid-color);
-    border-right: var(--grid-border-size) solid var(--grid-color);
-    border-top: var(--grid-border-size) solid var(--grid-color);
-
-}
-
-/* right slots */
-.top-right-slot {
-    border-bottom: var(--grid-border-size) solid var(--grid-color);
-    border-left: var(--grid-border-size) solid var(--grid-color);
-}
-
-.middle-right-slot {
-    border-left: var(--grid-border-size) solid var(--grid-color);
-    border-top: var(--grid-border-size) solid var(--grid-color);
-    border-bottom: var(--grid-border-size) solid var(--grid-color);
-}
-
-.bottom-right-slot {
-    border-left: var(--grid-border-size) solid var(--grid-color);
-    border-top: var(--grid-border-size) solid var(--grid-color);
-}
-
