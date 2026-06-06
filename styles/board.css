@@ -1,18 +1,22 @@
 /* board design designed for an n sized tic-tac-toe board */
 
 :root {
-    --grid-color: #F4FDD9; /* light yeellow */
-    --player-x: #6A8D73; /* Dusty Olive */
-    --player-o: #F0A868; /* Sandry Brown */
+    --grid-color: red;
+    /*#F0A868;*/
+    /* light yeellow */
+    --player-x: #6A8D73;
+    /* Dusty Olive */
+    --player-o: #DE3C4B;
+    /* Sandry Brown */
 
     --board-size: 3;
     --max-board-width: 600px;
     --max-board-height: 600px;
     --min-board-width: 100px;
-    --min-board-height: 100px;    
+    --min-board-height: 100px;
 
     --grid-border-size: 2px;
-    --sign-size: clamp(2rem, calc((80vmin / var(--board-size)) * 0.75), 10rem);
+    --sign-size: clamp(0.25rem, calc((35vmin / var(--board-size)) * 0.75), 10rem);
 }
 
 .board-container {
@@ -23,9 +27,9 @@
     width: 80vmin;
     height: 80vmin;
 
-    grid-template-rows: repeat(var(--board-size), minmax(0,1fr));    
-    grid-template-columns: repeat(var(--board-size), minmax(0,1fr));   
-    
+    grid-template-rows: repeat(var(--board-size), minmax(0, 1fr));
+    grid-template-columns: repeat(var(--board-size), minmax(0, 1fr));
+
 
 }
 
@@ -42,6 +46,14 @@
     color: var(--player-x);
     font-size: var(--sign-size);
 
+}
+
+.playerX {
+    color: var(--player-x)
+}
+
+.playerO {
+    color: var(--player-o)
 }
 
 .top-left-slot {
@@ -99,4 +111,3 @@
     border-left: var(--grid-border-size) solid var(--grid-color);
     border-top: var(--grid-border-size) solid var(--grid-color);
 }
-

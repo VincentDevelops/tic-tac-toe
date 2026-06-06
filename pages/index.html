@@ -1,39 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="/scripts/player.js" defer></script>
-    <script src="/scripts/gameBoard.js" defer></script>
-    <script src="/scripts/gameState.js" defer></script>
-    <script src="/scripts/gameController.js" defer></script>
-    <script src="/scripts/displayController.js" defer></script>
-    <script src="/scripts/main.js" defer></script>
-    <link rel="stylesheet" href="/styles/modern-normalize.css">
-    <link rel="stylesheet" href="/styles/board.css">
-    <link rel="stylesheet" href="/styles/style.css">
-    
+    <script src="../scripts/player.js" defer></script>
+    <script src="../scripts/gameBoard.js" defer></script>
+    <script src="../scripts/gameState.js" defer></script>
+    <script src="../scripts/gameController.js" defer></script>
+    <script src="../scripts/displayController.js" defer></script>
+    <script src="../scripts/main.js" defer></script>
+
+    <link rel="stylesheet" href="../styles/modern-normalize.css">
+    <link rel="stylesheet" href="../styles/board.css">
+    <link rel="stylesheet" href="../styles/style.css">
+
     <title>Tic-Tac-Toe</title>
 </head>
+
 <body>
 
     <div class="container flex">
 
         <header class="container-header flex">
-            <img src="" alt="" class="logo">
         </header>
 
         <main class="container-main flex">
 
-            <div class="playerMenu">
-                <h1></h1>
+            <div class="player-menu flex ">
+                <div class="opponent-menu flex">
+                    <h1 class="choose-opponent">
+                        CHOOSE</br>
+                        YOUR</br>
+                        OPPONENT
+                    </h1>
+                    <button class="button vs-comp">v.s. Computer</button>
+                    <button class="button vs-hum">v.s. Player 2</button>
+                </div>
+
+                <div class="sign-menu flex hide">
+                    <h1 class="choose-opponent">
+                        PLAYER 1,<br>
+                        CHOOSE<br>
+                        YOUR<br>
+                        WEAPON
+                    </h1>
+                    <button class="button x">X</button>
+                    <button class="button o red">O</button>
+                </div>
+
+                <div class="size-menu hide">
+                    <div class="size-list flex">
+                        <h1 class="choose-opponent">
+                            CHOOSE<br>
+                            GRID<br>
+                            SIZE<br>
+                        </h1>
+                        <button class="button size">3</button></a>
+                        <button class="button size">4</button></a>
+                        <button class="button size">5</button></a>
+                        <button class="button size">6</button></a>
+                        <button class="button size">7</button></a>
+                        <button class="button size">8</button></a>
+                        <button class="button size">9</button></a>
+                        <button class="button size">10</button></a>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="board-container grid">
+            <div class="board-container grid hide">
+            </div>
 
-
-
-
+            <div class="game-over flex hide">
+                <h1 class="announcement">Game Over</h1>
+                <h2 id="winner"> Player X Won!</h2>
+                <button class="button play-again">PLAY AGAIN</button>
+                <button class="button change-size">CHANGE SIZE</button>
+                <button class="button main-menu">MAIN MENU</button>
             </div>
 
         </main>
@@ -41,4 +85,5 @@
     </div>
 
 </body>
+
 </html>

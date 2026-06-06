@@ -8,13 +8,29 @@ const displayController = ((gameBoard, container) => {
 
 
 
+    const changeSize = (size) => {
+        board.setNewSize(size);
+        boardSize = size;
+        adjustBoardContainerSize();
+        boardContainer.replaceChildren();
+        renderBoard();
+
+    }
+
+    const clearBoard = () => {
+        for (let row = 0; row < boardSize; row++) {
+            for (let column = 0; column < boardSize; column++) {
+                getSlotElementAt(row, column).textcontent = ' ';
+            }
+        }
+    }
 
     const renderBoard = () => {
         adjustBoardContainerSize();
 
         for (let row = 0; row < boardSize; row++) {
             for (let column = 0; column < boardSize; column++) {
-                boardContainer.append(createSlot(row,column));
+                boardContainer.append(createSlot(row, column));
             }
         }
 
@@ -40,27 +56,27 @@ const displayController = ((gameBoard, container) => {
 
         // top row
         if (row == 0) {
-            if (column == 0) 
+            if (column == 0)
                 slot.classList.add("top-left-slot");
             else if (column == boardSize - 1)
                 slot.classList.add("top-right-slot");
-            else 
+            else
                 slot.classList.add("top-middle-slot")
         } // bottom row 
         else if (row == boardSize - 1) {
-            if (column == 0) 
+            if (column == 0)
                 slot.classList.add("bottom-left-slot");
             else if (column == boardSize - 1)
                 slot.classList.add("bottom-right-slot");
-            else 
+            else
                 slot.classList.add("bottom-middle-slot")
         } // center row(s) 
         else {
-            if (column == 0) 
+            if (column == 0)
                 slot.classList.add("middle-left-slot");
             else if (column == boardSize - 1)
                 slot.classList.add("middle-right-slot");
-            else 
+            else
                 slot.classList.add("middle-slot")
         }
 
@@ -68,9 +84,23 @@ const displayController = ((gameBoard, container) => {
 
     }
 
-    return {renderBoard}
+    const getSlotElementAt = (row, column) => {
 
-}) 
+        if (board.isValidCoordinate(row, column) === false)
+            return null;
+
+        return boardContainer.querySelector(
+            `[data-row="${row}"][data-column="${column}"]`
+        );
+
+
+    }
+
+    const getSize = () => boardSize
+
+    return { clearBoard, getSize, renderBoard, getSlotElementAt, changeSize }
+
+})
 
 
 

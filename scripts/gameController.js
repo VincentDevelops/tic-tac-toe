@@ -1,12 +1,12 @@
 // handles the rules of the game
 
 const gameController = ((gameBoard, state) => {
-    
+
     const board = gameBoard;
 
     let player1Turn = true;
     let player2Turn = false;
-    let gameState =  state; // { won: false, tied: false, gameOver:false, winnerSign: null }
+    let gameState = state; // { won: false, tied: false, gameOver:false, winnerSign: null }
 
 
     const restartGame = () => {
@@ -20,11 +20,11 @@ const gameController = ((gameBoard, state) => {
         if (gameState.isGameOver())
             return;
 
-        if (isValidMove(row,column)) {
+        if (isValidMove(row, column)) {
             board.setSlotTo(sign, row, column);
             gameState.changePlayerTurn();
         } else {
-            throw new Error("gameController: out of bounds slot selected")
+            throw new Error(`gameController: out of bounds slot selected row:${row} column:${column}`)
         }
         updateGameState();
 
@@ -35,19 +35,19 @@ const gameController = ((gameBoard, state) => {
         } else if (player2Turn) {
             player1Turn = true;
             player2Turn = false;
-        }      
-        
-        return { validMove:true, won:false, tied: false, gameOver:false, winnerSign: null } 
+        }
+
+        return { validMove: true, won: false, tied: false, gameOver: false, winnerSign: null }
 
     }
 
     const isValidMove = (row, column) => {
         // must bee within bounds
-        if (!board.isValidCoordinate(row,column))
+        if (!board.isValidCoordinate(row, column))
             return false;
 
         // slot cannot already be taken
-        if (board.getSlot(row,column) !== '')
+        if (board.getSlot(row, column) !== '')
             return false;
 
         return true;
@@ -65,7 +65,7 @@ const gameController = ((gameBoard, state) => {
             gameState.setWon(verticalCheck.won);
             gameState.setWinnerSign(verticalCheck.winnerSign);
         }
-        else if (horizontalCheck.won){
+        else if (horizontalCheck.won) {
             gameState.setWon(horizontalCheck.won);
             gameState.setWinnerSign(horizontalCheck.winnerSign);
         }
@@ -73,7 +73,7 @@ const gameController = ((gameBoard, state) => {
             gameState.setWon(diagonalCheck.won);
             gameState.setWinnerSign(diagonalCheck.winnerSign);
         }
-        else 
+        else
             gameState.setWon(false);
 
         return gameState.isGameWon();
@@ -81,58 +81,58 @@ const gameController = ((gameBoard, state) => {
 
     // does not check for wins, simply if board is full. win must be checked 
     const isGameTied = () => {
-        for (let row = 0; row < board.getBoardSize(); row ++) 
+        for (let row = 0; row < board.getBoardSize(); row++)
             for (let column = 0; column < board.getBoardSize(); column++)
-                if (board.getSlot(row,column) === '')
+                if (board.getSlot(row, column) === '')
                     return false;
 
         gameState.setTied(true);
-        return gameState.isGameTied();
+        return gameState.isTied();
     }
 
     const isGameWonVertically = () => {
 
         let sign = '';
 
-        for (let row = 0; row < board.getBoardSize(); row++){
+        for (let row = 0; row < board.getBoardSize(); row++) {
             let column = 0;
-            sign = board.getSlot(row , column);
-            
+            sign = board.getSlot(row, column);
+
             if (sign === '')
                 continue;
 
-            while (column < board.getBoardSize() && sign === board.getSlot(row,column)) {
+            while (column < board.getBoardSize() && sign === board.getSlot(row, column)) {
                 column++;
             }
 
             if (column === board.getBoardSize())
-                return { won:true, winnerSign:sign }
+                return { won: true, winnerSign: sign }
 
         }
-        
-        return { won:false, winnerSign: null };
+
+        return { won: false, winnerSign: null };
     }
 
     const isGameWonHorizontally = () => {
         let sign = '';
 
-        for (let column = 0; column < board.getBoardSize(); column++){
+        for (let column = 0; column < board.getBoardSize(); column++) {
             let row = 0;
-            sign = board.getSlot(row , column);
-            
+            sign = board.getSlot(row, column);
+
             if (sign === '')
                 continue;
 
-            while (row < board.getBoardSize() && sign === board.getSlot(row,column)) {
+            while (row < board.getBoardSize() && sign === board.getSlot(row, column)) {
                 row++;
             }
 
             if (row === board.getBoardSize())
-                return { won:true, winnerSign:sign }
+                return { won: true, winnerSign: sign }
 
         }
-        
-        return { won:false, winnerSign:null };
+
+        return { won: false, winnerSign: null };
     }
 
     const isGameWonDiagonally = () => {
@@ -141,30 +141,30 @@ const gameController = ((gameBoard, state) => {
         let row = 0;
         let column = 0;
 
-        let sign = board.getSlot(row,column);
+        let sign = board.getSlot(row, column);
 
         if (sign !== '') {
             while (row < board.getBoardSize() && column < board.getBoardSize()) {
-                if (sign !== board.getSlot(row,column))
+                if (sign !== board.getSlot(row, column))
                     break;
                 row++;
                 column++;
             }
 
             if (row === board.getBoardSize() && column === board.getBoardSize())
-                return { won:true, winnerSign:sign }
+                return { won: true, winnerSign: sign }
 
-        } 
-        
+        }
+
         // going top right to bottom left
         row = board.getBoardSize() - 1;
         column = 0;
-        sign = board.getSlot(row,column);
+        sign = board.getSlot(row, column);
 
         if (sign !== '') {
 
             while (row >= 0 && column < board.getBoardSize()) {
-                if (sign !== board.getSlot(row,column))
+                if (sign !== board.getSlot(row, column))
                     break;
 
                 row--;
@@ -172,11 +172,11 @@ const gameController = ((gameBoard, state) => {
             }
 
             if (row === -1 && column === board.getBoardSize())
-                return { won:true, winnerSign:sign }
-            
+                return { won: true, winnerSign: sign }
+
         }
 
-        return { won:false ,winnerSign:null };
+        return { won: false, winnerSign: null };
     }
 
     const updateGameState = () => {
@@ -185,10 +185,12 @@ const gameController = ((gameBoard, state) => {
         if (isGameTied())
             return;
     }
-    
+
     const isPlayer1Turn = () => { return player1Turn }
 
-    return { restartGame, takeTurn, 
-                isGameWon , isPlayer1Turn }
-    
+    return {
+        restartGame, takeTurn, isValidMove,
+        isGameWon, isPlayer1Turn
+    }
+
 })
